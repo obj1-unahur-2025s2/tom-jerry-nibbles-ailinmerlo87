@@ -1,17 +1,62 @@
+import wollok.mirror.*
 import tomJerryNibbles.*
 
 describe "Grupo de test" {
 
-  test "test 1" {
-    assert.equals(100, 50+50)
+  test "La velcidad maxima Inicial es 10 y energia 50" {
+    assert.equals(10, tom.velocidadMaxima())
+    assert.equals(50, tom.energia())
   }
 
-  test "test 3" {
-    assert.that(true)
+  test "Comer a Jerry lleva su VelMax a 15.2 y energia a 102" {
+    tom.comer(jerry)
+    assert.equals(15.2, tom.velocidadMaxima())
+    assert.equals(102, tom.energia())
   }
 
-  test "test 4" {
-    assert.notThat(false)
+  test "Correr 24 metros lleva la velMax a 14 y energia a 90" {
+    tom.comer(jerry)
+    tom.correr(24)
+    assert.equals(14, tom.velocidadMaxima())
+    assert.equals(90, tom.energia())
   }
 
+  test "Comer a nibbles lleva la velMax a 18.7 y energia a 137" {
+    tom.comer(jerry)
+    tom.correr(24)
+    tom.comer(nibbles)
+    assert.equals(18.7, tom.velocidadMaxima())
+    assert.equals(137, tom.energia())
+  }
+
+ test "Comer a Jerry con 3 años mas lleva la velMax a 25.9 y energia a 209" {
+    tom.comer(jerry)
+    tom.correr(24)
+    tom.comer(nibbles)
+    jerry.cumplirAños()
+    tom.comer(jerry)
+    assert.equals(25.9, tom.velocidadMaxima())
+    assert.equals(209, tom.energia())
+  }
+
+   test "Correr 38metros lleva su velMax a 24 y su energia a 190" {
+    tom.comer(jerry)
+    tom.correr(24)
+    tom.comer(nibbles)
+    jerry.cumplirAños()
+    tom.comer(jerry)
+    tom.correr(38)
+    assert.equals(24, tom.velocidadMaxima())
+    assert.equals(24, tom.energia())
+  }
+
+   
+   
+   test "Tom cazó a jerry y luego puede cazar a 99metros" {
+      assert.that(tom.puedeCazar(99))
+   }
+
+   test "Tom NO puede cazar a 120metros" {
+      assert.notThat(tom.puedeCazar(120))
+   }
 }
